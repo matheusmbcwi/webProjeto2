@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Pro&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<body>
+  {% if erro %}
+  <script>
+      alert('Erro! Falha no processo de login.')
+  </script>
+  {% endif %}
+    <div id="login">
+        <h1 class="borda_texto text-center text-white pt-5" style="-webkit-text-stroke-width: 1px !important; -webkit-text-stroke-color: #ffffff !important; font-size: 2.5em; color: #962320 !important;">MENSAGENS DE ANIMES</h1>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="/lista" method="post">
+                            <h2 class="text-center text-info" style="color: #962320 !important;">LOGIN</h2>
+                            <div class="form-group">
+                                <label for="username" class="text-info" style="color: #962320 !important;" >Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info" style="color: #962320 !important;">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" style="background-color: #962320 !important;" value="Entrar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url(https://bordandonapratica.com.br/wp-content/uploads/2020/06/Matriz-De-Bordado-Nuvem-Vermelha-para-bordar-4-.png);
+            height: 100vh;
+        }
+        #login .container #login-row #login-column #login-box {
+        margin-top: 120px;
+        max-width: 600px;
+        height: 320px;
+        border: 5px solid #962320;
+        background-color: #EAEAEA;
+        }
+        #login .container #login-row #login-column #login-box #login-form {
+        padding: 20px;
+        }
+        #login .container #login-row #login-column #login-box #login-form #register-link {
+        margin-top: -85px;
+        }
+    </style>
+</body>
+</html>
