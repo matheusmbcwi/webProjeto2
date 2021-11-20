@@ -17,7 +17,12 @@
             <a class="list-group-item list-group-item-action active" style="font-size: 2em; text-align: center; text-transform: uppercase; "> <b>FRASES DO ANIME {{ nome }}</b>  </a>
             {% for i in range(qtd) %}
                 <a class="list-group-item list-group-item-action"><i>{{ frases[i]['character'] }} -> {{ frases[i]['quote'] }}</i></a>
-                <a class="list-group-item list-group-item-action"><b>{{ frases[i]['character'] }} -> {{ frasesBR[i]['result'] }}</b></a>
+                <a hidden class="list-group-item list-group-item-action" id="fb {{ i }}"><i>{{ frases[i]['character'] }} -> {{ frases[i]['quote'] }}</i></a>
+                <div class="row">
+                    <div class="col-md-6" ><a  style="width: 100%" class="btn btn-primary" href="#" >Traduzir</a></div>
+                    <div class="col-md-6" ><a onclick="exibir({{ i }})" style="width: 100%" class="btn btn-primary" href="#">Ouvir Frase em EN</a></div>
+                    <div hidden class="col-md-6" ><a  style="width: 100%" class="btn btn-primary" href="#">Ouvir Frase em PT</a></div>
+                </div>
             {% endfor %}
           </div>
         </div>
@@ -29,6 +34,20 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Pro&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 
+  <script>
+
+      function exibir(i){
+          var fraseBR = document.getElementById("fb " + i);
+          fraseBR.hidden = false;
+      }
+
+      function traduzir(frase){
+          frasesBR =   {{ traduzir2('red') }}
+          console.log(frasesBR);
+      }
+
+  </script>
+
 <style>
     body {
             margin: 0;
@@ -37,6 +56,8 @@
             height: 100vh;
         }
 </style>
+
+
 
 </body>
 

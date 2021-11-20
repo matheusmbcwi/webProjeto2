@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import requests
 import json
-import pprint
 import base64
 
 app = Flask(__name__)
@@ -37,27 +36,44 @@ def lista_animes():  # put application's code here
 def lista_frases():
 
     frases = {}
-    frasesBR = {}
+    frasesBR = "wind"
     nome = request.args.get('nome')
     dadosfrases = requests.get('https://animechan.vercel.app/api/quotes/anime?title=' + nome + '&page=1').json()
 
     for i in range(len(dadosfrases)):
 
+        # url = 'https://api.gotit.ai/Translation/v1.1/Translate'
+        # data = {"T": dadosfrases[i]['quote'], "SL": "EnUs", "TL": "PtBr"}
+        # data_json = json.dumps(data)
+        # userAndPass = base64.b64encode(b"2202-OXYD/a0Z:PwzCVSxbJEBK0xk6Ok7TqtNwoSFXlMtBtE3knpfjkXrU").decode("ascii")
+        # headers = {'Content-type': 'application/json', "Authorization": "Basic %s" % userAndPass}
+        # response = requests.post(url, data=data_json, headers=headers)
+
+        # frasesBR[i] = response.json()
+
+        frases[i] = dadosfrases[i]
+
+    qtd = len(dadosfrases)
+
+    return render_template('Frases.html', frases=frases, frasesBR=frasesBR, qtd=qtd, nome=nome)
+
+@app.context_processor
+def utility_processor():
+
+    def traduzir2(frase):
+
         url = 'https://api.gotit.ai/Translation/v1.1/Translate'
-        data = {"T": dadosfrases[i]['quote'], "SL": "EnUs", "TL": "PtBr"}
+        data = {"T": frase, "SL": "EnUs", "TL": "PtBr"}
         data_json = json.dumps(data)
         userAndPass = base64.b64encode(b"2202-OXYD/a0Z:PwzCVSxbJEBK0xk6Ok7TqtNwoSFXlMtBtE3knpfjkXrU").decode("ascii")
         headers = {'Content-type': 'application/json', "Authorization": "Basic %s" % userAndPass}
         response = requests.post(url, data=data_json, headers=headers)
 
-        frasesBR[i] = response.json()
+        print(response.json()['result'])
 
-        frases[i] = dadosfrases[i]
+        return response.json()['result']
 
-    qtd = len(dadosfrases)
-    print(qtd)
-    return render_template('Frases.html', frases=frases, frasesBR=frasesBR, qtd=qtd, nome=nome)
-
+    return dict(traduzir2=traduzir2)
 
 if __name__ == '__main__':
     app.run()
